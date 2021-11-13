@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
+    <title>Connect 4</title>
     <head>
         <link rel="stylesheet" href="css/style.css">
         <script src="js/functions.js"></script>
     </head>
 
     <body>
+        
         <div class="row">
-            <div class="column" style="background-color:#1b30ee;">
+            <button type="button" onclick="newGame()">NEW START</button>
+
+            <div class="column">
                 <table id="table" class="table table-bordered">
                 <tr>
                     <td><button id="p0_0" onclick='play(0,0)'></button></td>
@@ -74,9 +78,9 @@
             </div>
         </div>
 
-        <div id="infobox" class="column">
+        <div id="infobox" class="column"></div>
+    
 
-        </div>
     </body>
 
 </html>
