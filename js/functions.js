@@ -6,12 +6,17 @@ var game = {
     cells : []
 };
 
+var winsP1=0;
+var winsP2=0;
+var draws=0;
+
 game.cells[0]=["white","white","white","white","white","white","white"];
 game.cells[1]=["white","white","white","white","white","white","white"];
 game.cells[2]=["white","white","white","white","white","white","white"];
 game.cells[3]=["white","white","white","white","white","white","white"];
 game.cells[4]=["white","white","white","white","white","white","white"];
 game.cells[5]=["white","white","white","white","white","white","white"];
+
 
 function newGame() {
    var x = Math.floor(Math.random()*2);
@@ -30,9 +35,12 @@ function newGame() {
        }
    }
    document.getElementById("infobox").innerHTML=" ";
+   document.getElementById("infobox2").innerHTML="<h3>Wins/Draws</h3><br>";
+   document.getElementById("infobox2").innerHTML+="Wins Player 1: "+winsP1+"<br>";
+   document.getElementById("infobox2").innerHTML+="Wins Player 2: "+winsP2+"<br>";
+   document.getElementById("infobox2").innerHTML+="Draws: "+draws;
+   
 }
-
-newGame();
 
 function play(row,column) {
 
@@ -63,13 +71,22 @@ function play(row,column) {
         disableButtons();
         document.getElementById("infobox").innerHTML+="<br>";
         document.getElementById("infobox").innerHTML+="<b>Winner is"+" "+game.plays+". Congratulations!!!</b>";
+
+        if(getPlayerTurn()=="P1") {
+            winsP1++;
+        }else{
+            winsP2++;
+        }
     }
 
     if(isDraw()) {
+        document.getElementById("infobox").innerHTML+="<br>";
         document.getElementById("infobox").innerHTML+="It is a Draw!!";
+        draws++;
     }
 
     
+
     changePlayerTurn();
     getPlayerTurn();
 
@@ -183,4 +200,23 @@ function disableButtons() {
             document.getElementById("p"+i+"_"+j).disabled=true;
         }
     }
+}
+
+
+/*Google Pie Chart*/
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Result', 'Amount'],
+        ['Player 1 Wins',winsP1],
+        ['Player 2 Wins',winsP2],
+        ['Draws',draws],
+    ]);
+
+    var options = {
+        title: 'Results',
+        is3D: true,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
 }

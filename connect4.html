@@ -4,12 +4,25 @@
     <head>
         <link rel="stylesheet" href="css/style.css">
         <script src="js/functions.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script>
+            google.charts.load("current", {packages:["corechart"]});
+        </script>
     </head>
 
     <body>
         
         <div class="row">
-            <button type="button" onclick="newGame()">NEW START</button>
+
+            <div id="menu">
+                <h1><center>MENU</center></h1><br>
+                <center><button type="button" id="start" onclick="newGame()">New Game</button></center>
+                <center><button type="button" id="stats" onclick="drawChart()">Statistics</button></center>
+            </div>
+
+
+            <div id="piechart_3d" style="width: 500px; height: 500px;"></div>
 
             <div class="column">
                 <table id="table" class="table table-bordered">
@@ -78,8 +91,11 @@
             </div>
         </div>
 
-        <div id="infobox" class="column"></div>
-    
+        <div>
+            <div id="infobox" class="column div1"></div>
+            <div id="infobox2" class="column div2"></div>
+        </div>
+
 
     </body>
 

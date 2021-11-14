@@ -11,7 +11,7 @@
     background-color: rgb(28, 102, 240);
     border:3px solid black;
     margin-left:30%;
-    margin-top:-3%;
+    
 }
   
 table {
@@ -27,10 +27,57 @@ button {
     border-radius: 50%;
 }
 
+#start,#stats {
+  border-radius:4px;
+  width:100px;
+  height:50px;
+  transition-duration:0.2s;
+}
+
+#start:hover {
+  background-color: #555555;
+  color: white;
+}
+
+#stats:hover {
+  background-color: #555555;
+  color: white;
+}
+
 #infobox {
     background-color: #d1d4f0;
     margin-top:1%;
-    overflow:hidden;
+    float:left;
+    height:800px;
+    
+}
+
+#infobox2 {
+  float:right;
+  width:15%;
+  height:794px;
+  margin-top:-41.9%;
+  margin-right:30.75%;
+  border: 0cm;
+  text-align: center;
+  background-color: #d1d4f0;
+}
+
+#menu {
+  border:3px solid black;
+  width:25%;
+  height:500px;
+  margin-left:2%;
+  float:left;
+  background-color:#d1d4f0 ;
+  font-family: "Audiowide", sans-serif;
+}
+
+#piechart_3d {
+  float:right;
+  width:25%;
+  height:500px;
+  margin-right:2%;
 }
 
 body {
@@ -38,20 +85,20 @@ body {
 }
 
 .blinking{
-    animation:blinking 1.2s infinite;
+    animation:blinking 1s infinite;
 }
 
 @keyframes blinking {
-    0% {
-      background-color: #2ba805;
-      box-shadow: 0 0 20px #2ba805;
-    }
-    50% {
-      background-color: #49e819;
-      box-shadow: 0 0 40px #49e819;
-    }
-    100% {
-      background-color: #2ba805;
-      box-shadow: 0 0 20px #2ba805;
-    }
+  0% {
+    background-color: #34dd0a;
+    box-shadow: 0 0 20px #34dd0a;
+  }
+  50% {
+    background-color: #49e819;
+    box-shadow: 0 0 40px #49e819;
+  }
+  100% {
+    background-color: #249900;
+    box-shadow: 0 0 20px #249900;
+  }
 }
