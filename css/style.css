@@ -44,21 +44,23 @@ button {
 }
 
 #infobox {
+  position:absolute;
     background-color: #d1d4f0;
     margin-top:1%;
     float:left;
-    height:800px;
-    
+    height:82.6%;
+  
 }
 
 #infobox2 {
+  position:absolute;
   float:right;
   width:15%;
-  height:794px;
-  margin-top:-41.9%;
-  margin-right:30.75%;
-  border: 0cm;
+  height:82%;
+  margin-top:1.15%;
+  margin-left:54.25%;
   text-align: center;
+  border:0;
   background-color: #d1d4f0;
 }
 
@@ -73,9 +75,10 @@ button {
 }
 
 #piechart_3d {
-  float:right;
+  position:absolute;
   width:25%;
-  height:500px;
+  height:25%;
+  left:72%;
   margin-right:2%;
 }
 
@@ -102,7 +105,7 @@ body {
   }
 }
 
-@media only screen and (max-width:1920px) {
+@media only screen and (max-width:1833px) {
 
   button {
     width:100px;
@@ -110,13 +113,17 @@ body {
   }
 
   #piechart_3d {
+    display:flexbox;
     position:absolute;
-    margin-top:50%;
+    margin-top:39.25%;
+    left:1%;
+    width:20%;
   }
 
   table {
-    margin-top:0%;
     width:90%;
     height:90%;
+    margin-left:2%;
   }
+  
 }

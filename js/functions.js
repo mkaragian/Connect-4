@@ -1,13 +1,13 @@
 "use strict";
 
 var game = {
-    plays : "P1",
+    plays : "Player_1",
     moves : 0,
     cells : []
 };
 
-var winsP1=0;
-var winsP2=0;
+var winsPlayer_1=0;
+var winsPlayer_2=0;
 var draws=0;
 
 game.cells[0]=["white","white","white","white","white","white","white"];
@@ -17,13 +17,12 @@ game.cells[3]=["white","white","white","white","white","white","white"];
 game.cells[4]=["white","white","white","white","white","white","white"];
 game.cells[5]=["white","white","white","white","white","white","white"];
 
-
 function newGame() {
    var x = Math.floor(Math.random()*2);
    if(x==0) {
-       game.plays="P1";
+       game.plays="Player_1";
    }else{
-       game.plays="P2";
+       game.plays="Player_2";
    }
    game.moves=0;
    for(let i=0;i<6;i++) {
@@ -35,9 +34,10 @@ function newGame() {
        }
    }
    document.getElementById("infobox").innerHTML=" ";
+   document.getElementById("infobox").innerHTML+=game.plays+" plays first<br>";
    document.getElementById("infobox2").innerHTML="<h3>Wins/Draws</h3><br>";
-   document.getElementById("infobox2").innerHTML+="Wins Player 1: "+winsP1+"<br>";
-   document.getElementById("infobox2").innerHTML+="Wins Player 2: "+winsP2+"<br>";
+   document.getElementById("infobox2").innerHTML+="Wins Player_1: "+winsPlayer_1+"<br>";
+   document.getElementById("infobox2").innerHTML+="Wins Player_2: "+winsPlayer_2+"<br>";
    document.getElementById("infobox2").innerHTML+="Draws: "+draws;
    
 }
@@ -45,7 +45,7 @@ function newGame() {
 function play(row,column) {
 
     for(let i=5;i>-1;i--) {
-        if(game.cells[i][column]=="white") {
+        if(isValidMove(i,column)) { //isValidMove
             row=i;
             break;
         }
@@ -53,39 +53,39 @@ function play(row,column) {
 
     document.getElementById("p"+row+"_"+column).disabled=true;
     
-    if(game.plays=="P1"){
+    if(game.plays=="Player_1"){
         document.getElementById("p"+row+"_"+column).innerHTML= "<img src='images/red_player.png' width='100' height='100'>";
     }
 
-    if(game.plays=="P2") {
-        document.getElementById("p"+row+"_"+column).innerHTML= "<img src='images/yellow_player2.png' width='100' height='100'>";
+    if(game.plays=="Player_2") {
+        document.getElementById("p"+row+"_"+column).innerHTML= "<img src='images/yellow_player.png' width='100' height='100'>";
     }
 
     game.cells[row][column]=game.plays;
     game.moves++;
 
     var empty_cells=42-game.moves;
-    document.getElementById("infobox").innerHTML+="Move "+game.moves+ ". Player " + game.plays+ ". Empty Cells: "+empty_cells+"<br>";
+    document.getElementById("infobox").innerHTML+="Move "+game.moves+". "+game.plays+ ".  Empty Cells: "+empty_cells+"<br>";
 
-    if(hasPlayerWon()) {
+    if(hasPlayerWon()) {    //hasPlayerWon
         disableButtons();
         document.getElementById("infobox").innerHTML+="<br>";
         document.getElementById("infobox").innerHTML+="<b>Winner is"+" "+game.plays+". Congratulations!!!</b>";
 
-        if(getPlayerTurn()=="P1") {
-            winsP1++;
+        if(getPlayerTurn()=="Player_1") {
+            winsPlayer_1++;
         }else{
-            winsP2++;
+            winsPlayer_2++;
         }
     }
 
-    if(isDraw()) {
+    if(isDraw()) {  //isDraw
         document.getElementById("infobox").innerHTML+="<br>";
         document.getElementById("infobox").innerHTML+="It is a Draw!!";
         draws++;
     }
 
-    
+    updatePage();
 
     changePlayerTurn();
     getPlayerTurn();
@@ -97,7 +97,7 @@ function getPlayerTurn() {
 }
 
 function isValidMove(row,column) {
-    if(game.cells[row,column]=="white") {
+    if(game.cells[row][column]=="white") {
         return true;
     }else{
         return false;
@@ -111,10 +111,10 @@ function isDraw() {
 }
 
 function changePlayerTurn() {
-    if(game.plays=="P1") {
-        game.plays="P2";
+    if(game.plays=="Player_1") {
+        game.plays="Player_2";
     }else{
-        game.plays="P1";
+        game.plays="Player_1";
     }
 }
 
@@ -202,13 +202,12 @@ function disableButtons() {
     }
 }
 
-
 /*Google Pie Chart*/
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
         ['Result', 'Amount'],
-        ['Player 1 Wins',winsP1],
-        ['Player 2 Wins',winsP2],
+        ['Player_1 Wins',winsPlayer_1],
+        ['Player_2 Wins',winsPlayer_2],
         ['Draws',draws],
     ]);
 
@@ -219,4 +218,11 @@ function drawChart() {
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
     chart.draw(data, options);
+}
+
+function updatePage() {
+    //The methods that we need for the update of the page(isValidMode,isDraw,hasPlayerWon) are executed/used inside play().
+
+    const d = new Date();
+    d.getTime();
 }
