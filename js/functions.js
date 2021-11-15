@@ -17,35 +17,60 @@ game.cells[3]=["white","white","white","white","white","white","white"];
 game.cells[4]=["white","white","white","white","white","white","white"];
 game.cells[5]=["white","white","white","white","white","white","white"];
 
+var newGameDate = new Date();
+
+function beforeStart() {
+    for(let i=0;i<6;i++) {
+        for(let j=0;j<7;j++) {
+            document.getElementById("p"+i+"_"+j).disabled=true;
+        }
+    }
+}
+
 function newGame() {
-   var x = Math.floor(Math.random()*2);
-   if(x==0) {
-       game.plays="Player_1";
-   }else{
-       game.plays="Player_2";
-   }
-   game.moves=0;
-   for(let i=0;i<6;i++) {
-       for(let j=0;j<7;j++) {
-           game.cells[i][j]="white";
-           document.getElementById("p"+i+"_"+j).innerHTML=" ";
-           document.getElementById("p"+i+"_"+j).classList.remove("blinking");
-           document.getElementById("p"+i+"_"+j).disabled=false;
-       }
-   }
-   document.getElementById("infobox").innerHTML=" ";
-   document.getElementById("infobox").innerHTML+=game.plays+" plays first<br>";
-   document.getElementById("infobox2").innerHTML="<h3>Wins/Draws</h3><br>";
-   document.getElementById("infobox2").innerHTML+="Wins Player_1: "+winsPlayer_1+"<br>";
-   document.getElementById("infobox2").innerHTML+="Wins Player_2: "+winsPlayer_2+"<br>";
-   document.getElementById("infobox2").innerHTML+="Draws: "+draws;
+    newGameDate = new Date();
+    var x = Math.floor(Math.random()*2);
+    if(x==0) {
+        game.plays="Player_1";
+    }else{
+        game.plays="Player_2";
+    }
+    game.moves=0;
+    for(let i=0;i<6;i++) {
+        for(let j=0;j<7;j++) {
+            game.cells[i][j]="white";
+            document.getElementById("p"+i+"_"+j).innerHTML=" ";
+            document.getElementById("p"+i+"_"+j).classList.remove("blinking");
+            document.getElementById("p"+i+"_"+j).disabled=false;
+        }
+    }
+    document.getElementById("infobox").innerHTML=" ";
+    document.getElementById("infobox").innerHTML+=game.plays+" plays first<br>";
+    document.getElementById("infobox2").innerHTML="<h3>Wins/Draws</h3><br>";
+    document.getElementById("infobox2").innerHTML+="Wins Player_1: "+winsPlayer_1+"<br>";
+    document.getElementById("infobox2").innerHTML+="Wins Player_2: "+winsPlayer_2+"<br>";
+    document.getElementById("infobox2").innerHTML+="Draws: "+draws;
    
 }
 
+var prev_time = 0;
+
 function play(row,column) {
+
+    var time=new Date();   //Edo pataei to koumpi
+    if(game.moves==0) {
+        var num = time.getTime()/1000 - newGameDate.getTime()/1000;
+        console.log(num.toPrecision(4)+" "+"seconds")
+    }
+
+    if(game.moves>0) {
+        var num = time.getTime()/1000-prev_time;
+        console.log(num.toPrecision(4)+" "+"seconds");
+    } 
 
     for(let i=5;i>-1;i--) {
         if(isValidMove(i,column)) { //isValidMove
+            prev_time=(time.getTime())/1000;
             row=i;
             break;
         }
@@ -65,7 +90,7 @@ function play(row,column) {
     game.moves++;
 
     var empty_cells=42-game.moves;
-    document.getElementById("infobox").innerHTML+="Move "+game.moves+". "+game.plays+ ".  Empty Cells: "+empty_cells+"<br>";
+    document.getElementById("infobox").innerHTML+="Move "+game.moves+". "+game.plays+ ".  Empty Cells: "+empty_cells+". Time: "+num.toPrecision(4)+"s"+"<br>";
 
     if(hasPlayerWon()) {    //hasPlayerWon
         disableButtons();
@@ -84,8 +109,6 @@ function play(row,column) {
         document.getElementById("infobox").innerHTML+="It is a Draw!!";
         draws++;
     }
-
-    updatePage();
 
     changePlayerTurn();
     getPlayerTurn();
@@ -218,11 +241,4 @@ function drawChart() {
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
     chart.draw(data, options);
-}
-
-function updatePage() {
-    //The methods that we need for the update of the page(isValidMode,isDraw,hasPlayerWon) are executed/used inside play().
-
-    const d = new Date();
-    d.getTime();
 }

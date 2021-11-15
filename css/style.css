@@ -87,21 +87,18 @@ body {
 }
 
 .blinking{
-    animation:blinking 1s infinite;
+    animation:blinking 1.2s infinite;
 }
 
 @keyframes blinking {
   0% {
-    background-color: #34dd0a;
-    box-shadow: 0 0 20px #34dd0a;
+    opacity:1;
   }
   50% {
-    background-color: #49e819;
-    box-shadow: 0 0 40px #49e819;
+    opacity:0;
   }
   100% {
-    background-color: #249900;
-    box-shadow: 0 0 20px #249900;
+    opacity:1;
   }
 }
 
