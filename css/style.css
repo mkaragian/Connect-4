@@ -26,11 +26,16 @@ button {
     border-radius: 50%;
 }
 
+h1 {
+  text-align: center;
+}
+
 #start,#stats {
   border-radius:4px;
   width:100px;
   height:50px;
   transition-duration:0.2s;
+  align-self: center;
 }
 
 #start:hover {
@@ -48,7 +53,7 @@ button {
     background-color: #d1d4f0;
     margin-top:1%;
     float:left;
-    height:82.6%;
+    height:84%;
   
 }
 

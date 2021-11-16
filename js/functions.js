@@ -60,7 +60,7 @@ function play(row,column) {
     var time=new Date();   //Edo pataei to koumpi
     if(game.moves==0) {
         var num = time.getTime()/1000 - newGameDate.getTime()/1000;
-        console.log(num.toPrecision(4)+" "+"seconds")
+        console.log(num.toPrecision(4)+" "+"seconds");
     }
 
     if(game.moves>0) {
@@ -106,12 +106,10 @@ function play(row,column) {
 
     if(isDraw()) {  //isDraw
         document.getElementById("infobox").innerHTML+="<br>";
-        document.getElementById("infobox").innerHTML+="It is a Draw!!";
+        document.getElementById("infobox").innerHTML+="<b>It is a Draw!!</b>";
         draws++;
     }
-
     changePlayerTurn();
-    getPlayerTurn();
 
 }
 
@@ -146,7 +144,6 @@ function horizontalWin() {
         for(let col=0;col<4;col++) {
             if(game.cells[row][col]!="white") {
                 if(game.cells[row][col] == game.cells[row][col+1] && game.cells[row][col] == game.cells[row][col+2] && game.cells[row][col] == game.cells[row][col+3]) {
-
                     for(let j=col;j<col+4;j++) {
                         document.getElementById("p"+row+"_"+j).className="blinking";
                     }
@@ -163,7 +160,6 @@ function verticalWin() {
         for(let row=0;row<3;row++) {
             if(game.cells[row][col]!="white") {
                 if(game.cells[row][col] == game.cells[row+1][col] && game.cells[row][col] == game.cells[row+2][col] && game.cells[row][col] == game.cells[row+3][col]) {
-
                     for(let i=row;i<row+4;i++) {
                         document.getElementById("p"+i+"_"+col).className="blinking";
                     }
@@ -180,12 +176,10 @@ function diagonialWin() {
         for(let row=0;row<3;row++) {
             if(game.cells[row][col]!="white") {
                 if(game.cells[row][col] == game.cells[row+1][col+1] && game.cells[row][col] == game.cells[row+2][col+2] && game.cells[row][col] == game.cells[row+3][col+3]) {
-
                     document.getElementById("p"+row+"_"+col).className="blinking";
                     document.getElementById("p"+(row+1)+"_"+(col+1)).className="blinking";
                     document.getElementById("p"+(row+2)+"_"+(col+2)).className="blinking";
                     document.getElementById("p"+(row+3)+"_"+(col+3)).className="blinking";
-
                     return true;
                 }
             }
@@ -196,13 +190,10 @@ function diagonialWin() {
         for(let row=5;row>2;row--) {
             if(game.cells[row][col]!="white") {
                 if(game.cells[row][col] == game.cells[row-1][col+1] && game.cells[row][col] == game.cells[row-2][col+2] && game.cells[row][col] == game.cells[row-3][col+3]) {
-
                     document.getElementById("p"+row+"_"+col).className="blinking";
                     document.getElementById("p"+(row-1)+"_"+(col+1)).className="blinking";
                     document.getElementById("p"+(row-2)+"_"+(col+2)).className="blinking";
                     document.getElementById("p"+(row-3)+"_"+(col+3)).className="blinking";
-
-
                     return true;
                 }
             }
@@ -215,6 +206,7 @@ function hasPlayerWon() {
     if(horizontalWin() || verticalWin() || diagonialWin()) {
         return true;
     }
+    //return false;
 }
 
 function disableButtons() {

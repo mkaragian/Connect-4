@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html>
-    <title>Connect 4</title>
+<html lang="en">
     <head>
+        <title>Connect 4</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="css/style.css">
         <link rel = "icon" id="connect4" href = "images/4-i-rad.png" type = "image/x-icon">
         <script src="js/functions.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script>
-            google.charts.load("current", {packages:["corechart"]});
-        </script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script>google.charts.load("current", {packages:["corechart"]});</script>
     </head>
 
     <body onpageshow="beforeStart()">
@@ -18,7 +17,7 @@
         <div class="row">
 
             <div id="menu">
-                <h1><center>MENU</center></h1><br>
+                <h1>MENU</h1><br>
                 <center><button type="button" id="start" onclick="newGame()">New Game</button></center>
                 <center><button type="button" id="stats" onclick="drawChart()">Statistics</button></center>
             </div>
