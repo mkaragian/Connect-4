@@ -51,8 +51,7 @@ function newGame() {
 var prev_time = 0;
 
 function play(row,column) {
-
-    var time=new Date();   //Edo pataei to koumpi
+    var time=new Date();   
     if(game.moves==0) {
         var num = time.getTime()/1000 - newGameDate.getTime()/1000;
     }
@@ -209,7 +208,6 @@ function hasPlayerWon() {
     if(horizontalWin() || verticalWin() || diagonialWin()) {
         return true;
     }
-    //return false;
 }
 
 function disableButtons() {
