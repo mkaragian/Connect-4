@@ -46,11 +46,6 @@ function newGame() {
     }
     document.getElementById("infobox").innerHTML=" ";
     document.getElementById("infobox").innerHTML+=game.plays+" plays first<br>";
-    document.getElementById("infobox2").innerHTML="<h3>Wins/Draws</h3><br>";
-    document.getElementById("infobox2").innerHTML+="Wins Player_1: "+winsPlayer_1+"<br>";
-    document.getElementById("infobox2").innerHTML+="Wins Player_2: "+winsPlayer_2+"<br>";
-    document.getElementById("infobox2").innerHTML+="Draws: "+draws;
-   
 }
 
 var prev_time = 0;
@@ -60,12 +55,10 @@ function play(row,column) {
     var time=new Date();   //Edo pataei to koumpi
     if(game.moves==0) {
         var num = time.getTime()/1000 - newGameDate.getTime()/1000;
-        console.log(num.toPrecision(4)+" "+"seconds");
     }
 
     if(game.moves>0) {
         var num = time.getTime()/1000-prev_time;
-        console.log(num.toPrecision(4)+" "+"seconds");
     } 
 
     for(let i=5;i>-1;i--) {
@@ -102,12 +95,22 @@ function play(row,column) {
         }else{
             winsPlayer_2++;
         }
+
+        document.getElementById("infobox2").innerHTML="<h3>Wins/Draws</h3><br>";
+        document.getElementById("infobox2").innerHTML+="Wins Player_1: "+winsPlayer_1+"<br>";
+        document.getElementById("infobox2").innerHTML+="Wins Player_2: "+winsPlayer_2+"<br>";
+        document.getElementById("infobox2").innerHTML+="Draws: "+draws;
     }
 
     if(isDraw()) {  //isDraw
         document.getElementById("infobox").innerHTML+="<br>";
         document.getElementById("infobox").innerHTML+="<b>It is a Draw!!</b>";
         draws++;
+
+        document.getElementById("infobox2").innerHTML="<h3>Wins/Draws</h3><br>";
+        document.getElementById("infobox2").innerHTML+="Wins Player_1: "+winsPlayer_1+"<br>";
+        document.getElementById("infobox2").innerHTML+="Wins Player_2: "+winsPlayer_2+"<br>";
+        document.getElementById("infobox2").innerHTML+="Draws: "+draws;
     }
     changePlayerTurn();
 
